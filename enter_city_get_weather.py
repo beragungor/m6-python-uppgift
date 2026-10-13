@@ -1,4 +1,5 @@
 import requests
+from geopy.geocoders import Nominatim
 
 def get_live_weather(lat, lon):
     url = "https://api.open-meteo.com/v1/forecast"
@@ -27,5 +28,22 @@ def get_live_weather(lat, lon):
     except requests.exceptions.RequestException as e:
         print(f"Error fetching weather data: {e}")
 
-# Example coordinates for Uppsala
-get_live_weather(59.8588, 17.6389)
+def get_city_coordinates(city_name):
+    geolocator = Nominatim(user_agent="my_city_to_coords_converter")
+    location = geolocator.geocode(city_name, language="en")
+    if location:
+        return location.latitude, location.longitude
+    else:
+        return None
+
+if __name__ == "__main__":
+    input_city_name = input("Give me the city name: ")
+
+    koordinater = get_city_coordinates(input_city_name)
+
+    if koordinater is not None:
+
+        lat, long = koordinater
+        get_live_weather(lat, long)
+    else:
+        print(f"Kunde inte hitta koordinater för staden {input_city_name}.")
