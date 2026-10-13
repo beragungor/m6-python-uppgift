@@ -1,5 +1,27 @@
+Personlig mål 
+
+
+
+
+
+
 **Ideer för m6**
 
 - kan fixa en enkelt svenska till turkiska översättning app, måste ha en databas föressten. Ska kunna addera nya ord om önskas då krävs båda svenska men turkiska översättning
 
-- 
+-vind, frys, regn och tempreatur kontroll enligst stad. kommer att kunna välja stad och ska visa om det rekommenderas att cyklas på den här vädret.
+
+-reaktionstid score list på tangentbord, human benchmark med användarregistrering. tas bäst score
+
+-mini spel complation
+
+-hälsa app som kollar på om man ska gå ner i vikten, maintain muskler, eller bulka. 
+
+-lektion hjälpare, automatisk öppna alla nödvändiga appar och tabs
+
+
+
+
+
+
+
