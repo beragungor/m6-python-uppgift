@@ -1,10 +1,3 @@
-Personlig mål 
-
-
-
-
-
-
 **Ideer för m6**
 
 - kan fixa en enkelt svenska till turkiska översättning app, måste ha en databas föressten. Ska kunna addera nya ord om önskas då krävs båda svenska men turkiska översättning
