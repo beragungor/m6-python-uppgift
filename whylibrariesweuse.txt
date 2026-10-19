@@ -1,0 +1,23 @@
+- request library
+det här library använder vi för att skicka HTTP-förfrågnignar över näten. Används för att koden ska kunna snacka med internet.
+
+request.get(url) --> för att hämta/läsa data från internet, skickar till url som läggs in 
+
+params=params --> skickar query parameters i url vilket är en dictionary som heter params (parameters). Den skapas av latitude, longitude, current vilker tar ju temprature, reletivite humiditiy och windspeed och timezone.
+
+timeout = 10 --> sätter tidgräns så satt om servern inte svarar inom 10 sekunder avbryts anropet och ett fel kastas, vilket är "requests.exceptions.Timeout". Om vi inte har timeout väntar python i oändliget tills servern svarar.
+
+Vår URL --> api.open-meteo.com  
+
+utan parameters, fungerar inte och vi får 400 Bad Request, Open-meteo kräver koordinater lat och long.
+
+temprature_2m , relative_humidity_2m, wind_speed_10m.
+temprature_2m --> lufttemperaturn mätt 2 meter över marken
+relative_humidity_2m --> reletiv luftfuktihet 2 meter över marken, fås som procent
+wind_speed_10m --> vindhastigheten mått 10 meter över marken, svaras i km/h 
+
+När servern svarar får vi tillbaka JSON fil. 
+
+response.raise_for_status() --> kontrollerar HTTP-statuskoden för svaret och kaster autmatisk ett fel om anropet misslyckades.
+
+
