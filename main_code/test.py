@@ -9,19 +9,23 @@ def get_live_weather(lat,lon):
     parameters = {
         "latitude" : lat,
         "longitude" : lon,
-        "current" : ["temperature_2m", "relative_humidity_2m", "wind_speed_10m"],
+        "current" : ["temperature_2m", "relative_humidity_2m", "wind_speed_10m", "rain"],
         "timezone" : "auto"
     }
 
     svar = requests.get(url, params=parameters)
     
     data = svar.json()
+#bara för att om det funkar
+    print("Svar från API:", data)
+
     current = data["current"]
     units = data["current_units"]
 
     print(current["temperature_2m"], units["temperature_2m"])
     print(current["relative_humidity_2m"], units["relative_humidity_2m"])
     print(current["wind_speed_10m"], units["wind_speed_10m"])
+    print(current["rain"],units["rain"])
 
 
-get_live_weather(59.3, 18.06)
+get_live_weather(43.2965, 5.3698)
