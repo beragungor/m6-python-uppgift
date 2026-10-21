@@ -22,11 +22,15 @@ def get_live_weather(lat,lon):
 def weather_no_bike_only(temp, wind_speed,nederbord):
     anledningar_att_inte_cykla = {
         "fly to air, too much wind" : wind_speed > 20,
-        "straight up as freeze" : temp < 20,
+        "straight up as freeze" : temp < -20,
         "det regnar för mycket" : nederbord > 0,
     }
+    
+    definitiv_no = []
 
-    definitiv_no = [msg for msg, is_bad in anledningar_att_inte_cykla.items() if is_bad]
+    for meddelande, det_inte_bra in anledningar_att_inte_cykla.items():
+        if det_inte_bra == True:
+            definitiv_no.append(meddelande)
     
     if definitiv_no:
         print("no bike homie. Reasons:",",".join(definitiv_no))
@@ -46,6 +50,6 @@ def weather_no_bike_only(temp, wind_speed,nederbord):
 #
 # main()
 #
-weather_no_bike_only(100, 100, 100)
+weather_no_bike_only(-100, 100, 100)
 
 
