@@ -6,8 +6,9 @@ with open("users.json", "r") as file:
 
 def login():
     while True:
-        username = input("What's your username? ") 
-        password = input("What's your password? ")  
+        print("\n-----Log in-----\n")
+        username = input("Enter your username: ") 
+        password = input("Enter your password: ")  
         if username in users and bcrypt.checkpw(password.encode("utf-8"),
             users[username]["password"].encode("utf-8")):
             print("\nLogin successfull!\n")
@@ -33,22 +34,25 @@ def login():
                     print("Please choose a valid option!")
 
 def register():
-    username = input("Choose your username: ")
-    if username in users:
-        print("Username already exists!")
+    while True:
+        print("\n-----Register-----\n")
+        username = input("Choose your username: ")
+        if username in users:
+            print("\nUsername already exists!")
 
-    password = input("Choose your password: ")
+        else:
+            password = input("Choose your password: ")
 
-    password_hash = bcrypt.hashpw(
-        password.encode("utf-8"),
-        bcrypt.gensalt()
-    ).decode("utf-8")
+            password_hash = bcrypt.hashpw(
+                password.encode("utf-8"),
+                bcrypt.gensalt()
+            ).decode("utf-8")
 
-    users[username] = {"password" : password_hash}
-    with open("users.json", "w") as file:
-        json.dump(users, file, indent=4, ensure_ascii=False)
-    print("Registration successful!")
-    return
+            users[username] = {"password" : password_hash}
+            with open("users.json", "w") as file:
+                json.dump(users, file, indent=4, ensure_ascii=False)
+            print("\nRegistration successful!")
+            return login()
     
 if __name__ == "__main__":
     login()

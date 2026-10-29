@@ -1,6 +1,7 @@
 from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderUnavailable, GeocoderTimedOut
 import requests
+from account import login, register
 
 def get_location_coords():
     geolocator = Nominatim(user_agent="Bikeability")
@@ -79,14 +80,34 @@ def logic(temp, humid, wind, prec):
 
 def main():
     print("\nWelcome to Bikability!\n")
-    input("What do you wanna do?\n\n  Log in (l)\n  Register (r)\n  Use Bikeability (u)\n\nYour choice: ")
+    print("What do you want to do?")
+    while True:
+        ans = input("    Log in (l)\n    Register (r)\n    Use Bikeability (b)\n    Quit (q)\nOption: ").strip().lower()
+        if ans == "l":
+            logged_in = login()
+            break
+
+        elif ans == "r":
+            logged_in = register()
+            break
+
+        elif ans == "b":
+            break
+
+        elif ans == "q":
+            print("Cya!")
+            return
+        
+        else:
+            print("\nPlease choose a valid option.")
+
+    #if logged_in:
+       # print("You are logged in!")
 
     lat, lon = get_location_coords()
-
     temp, humid, wind, prec = get_current_weather(lat, lon)
 
     answer = logic(temp, humid, wind, prec)
-
     print(f"\n{answer}")
 
 main()
