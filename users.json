@@ -1,1 +1,8 @@
-{}
+{
+    "Måns": {
+        "password": "$2b$12$I7EoVB5EziPTBZWOy6AFIOWKY7CvRiLn8kAGcA/i6vXUwkFulv8Fu"
+    },
+    "Alice": {
+        "password": "$2b$12$GFN7yl0HvnaAitJEw9PLReyKAs.yw04P1cVJ.UIib3iJj8YHqBGMe"
+    }
+}

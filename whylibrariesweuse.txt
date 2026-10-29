@@ -20,4 +20,5 @@ När servern svarar får vi tillbaka JSON fil.
 
 response.raise_for_status() --> kontrollerar HTTP-statuskoden för svaret och kaster autmatisk ett fel om anropet misslyckades.
 
-
+https://mywindsock.com/page/coffee-shop-chat/25-of-riders-dont-ride-above-this-windspeed/
+https://www.smhi.se/kunskapsbanken/meteorologi/vaderprognoser/trafikvader
