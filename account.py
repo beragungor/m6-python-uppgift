@@ -12,7 +12,7 @@ def login():
         if username in users and bcrypt.checkpw(password.encode("utf-8"),
             users[username]["password"].encode("utf-8")):
             print("\nLogin successfull!\n")
-            return True
+            return username, True
 
         else: 
             print("\nWrong username or password. What do you want to do?")
@@ -27,10 +27,11 @@ def login():
                     break
 
                 elif reg == "b":
-                    return False
+                    return None, False
 
                 else:
                     print("Please choose a valid option!")
+
 
 def register():
     while True:

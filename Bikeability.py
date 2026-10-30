@@ -2,13 +2,19 @@ from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderUnavailable, GeocoderTimedOut
 import requests
 from account import login, register
+import json
 
-def get_location_coords():
+with open("users.json", "r") as file:
+    users = json.load(file)
+
+
+def get_location_coords(logged_in, username, location_name):
     geolocator = Nominatim(user_agent="Bikeability")
 
     while True:
         try:
-            location_name = input("Your location (place, city, or address): ").strip()
+            if location_name is None:
+                location_name = input("Your location (place, city, or address): ").strip()
 
             location = geolocator.geocode(location_name, timeout = 12)
 
@@ -20,7 +26,7 @@ def get_location_coords():
 
                 lat = location.latitude
                 lon = location.longitude
-                return lat, lon
+                return lat, lon, location_name
 
             else:
                 print("\nNo location was found. Try being more specific.\n")
@@ -79,16 +85,18 @@ def logic(temp, humid, wind, prec):
 
 
 def main():
+    username = None
+    logged_in = False
     print("\nWelcome to Bikability!\n")
     print("What do you want to do?")
     while True:
         ans = input("    Log in (l)\n    Register (r)\n    Use Bikeability (b)\n    Quit (q)\nOption: ").strip().lower()
         if ans == "l":
-            logged_in = login()
+            username, logged_in = login()
             break
 
         elif ans == "r":
-            logged_in = register()
+            username, logged_in = register()
             break
 
         elif ans == "b":
@@ -101,13 +109,33 @@ def main():
         else:
             print("\nPlease choose a valid option.")
 
-    #if logged_in:
-       # print("You are logged in!")
+    if logged_in:
+        last_location = users[username].get("last location")
+       
+        if last_location:
+            ans = input(f"Do you want to use your last location {last_location} (y/n)").strip().lower()
+            if ans == "y":
+                location_name = last_location
+            else: 
+                location_name = None
+        else: 
+            location_name = None
+    else:
+        location_name = None
+   
+    lat, lon, location_name  = get_location_coords(logged_in, username, location_name)
 
-    lat, lon = get_location_coords()
     temp, humid, wind, prec = get_current_weather(lat, lon)
 
     answer = logic(temp, humid, wind, prec)
     print(f"\n{answer}")
+
+    if logged_in:
+        print("Do you want to save the location for next time? (y/n)")
+        ans = input("Option: ")
+        if ans == "y":
+            users[username]["last location"] = location_name
+            with open("users.json", "w") as file:
+                json.dump(users, file, indent=4, ensure_ascii=False)
 
 main()
