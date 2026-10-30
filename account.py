@@ -18,11 +18,10 @@ def login():
             print("\nWrong username or password. What do you want to do?")
             
             while True:
-                reg = input("    Register a new one (r)\n    Try again (t)\n    Use Bikeability (b)\nOption: ").strip().lower()
+                reg = input("    Register a new account (r)\n    Try again (t)\n    Use Bikeability (b)\nOption: ").strip().lower()
 
                 if reg == "r":
-                    register()
-                    break
+                    return register()
 
                 elif reg == "t":
                     break
